@@ -44,4 +44,4 @@ try:
     boton_fichar.click()
 
     # Esperar a que se complete el fichaje
-    We
+    
