@@ -12,7 +12,7 @@ options.add_argument("--headless")  # Ejecutar en modo headless (sin ventana)
 options.add_argument("--disable-gpu")  # Deshabilitar GPU para evitar problemas
 
 # Configurar la ruta del archivo msedgedriver.exe
-msedgedriver_path = r"C:\Carles\edgedriver_win64\msedgedriver.exe"
+msedgedriver_path ="C:\Carles\edgedriver_win64\msedgedriver.exe"
 
 # Crear una instancia del controlador de Edge
 driver = Edge(executable_path=msedgedriver_path, options=options)
