@@ -1,7 +1,8 @@
 import os
-import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from msedge.selenium_tools import Edge, EdgeOptions
 
 # Configuración de las opciones del navegador Edge
@@ -11,7 +12,7 @@ options.add_argument("--headless")  # Ejecutar en modo headless (sin ventana)
 options.add_argument("--disable-gpu")  # Deshabilitar GPU para evitar problemas
 
 # Configurar la ruta del archivo msedgedriver.exe
-msedgedriver_path = "C:\\Carles\\edgedriver_win64\\msedgedriver.exe"  # Ruta correcta del msedgedriver.exe
+msedgedriver_path = "r"C:\Carles\edgedriver_win64\msedgedriver.exe"  # Ruta correcta del msedgedriver.exe
 
 # Crear una instancia del controlador de Edge
 driver = Edge(executable_path=msedgedriver_path, options=options)
@@ -21,8 +22,8 @@ try:
     url_woffu = "https://app.woffu.com/es/login"
     driver.get(url_woffu)
 
-    # Esperar a que la página se cargue completamente
-    time.sleep(5)  # Puedes ajustar el tiempo de espera según sea necesario
+    # Esperar a que el campo de email esté presente y visible
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "login-email")))
 
     # Encontrar y completar los campos de inicio de sesión
     campo_email = driver.find_element(By.ID, "login-email")
@@ -35,15 +36,15 @@ try:
     boton_login = driver.find_element(By.XPATH, "//button[@type='submit']")
     boton_login.click()
 
-    # Esperar a que se complete el inicio de sesión
-    time.sleep(5)  # Puedes ajustar el tiempo de espera según sea necesario
+    # Esperar a que se complete el inicio de sesión y aparezca el botón de fichaje
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Fichar')]")))
 
     # Encontrar y hacer clic en el botón de fichaje
     boton_fichar = driver.find_element(By.XPATH, "//button[contains(text(), 'Fichar')]")
     boton_fichar.click()
 
     # Esperar a que se complete el fichaje
-    time.sleep(5)  # Puedes ajustar el tiempo de espera según sea necesario
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//div[@class='success']")))
 
 finally:
     # Cerrar el navegador al finalizar
