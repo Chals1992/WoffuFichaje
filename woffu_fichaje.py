@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from msedge.selenium_tools import Edge, EdgeOptions
+from selenium.common.exceptions import TimeoutException
 
 # Configuración de las opciones del navegador Edge
 options = EdgeOptions()
@@ -44,4 +45,12 @@ try:
     boton_fichar.click()
 
     # Esperar a que se complete el fichaje
-    
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//div[@class='success']")))
+
+except TimeoutException:
+    print("Tiempo de espera excedido. No se pudo completar la acción.")
+except Exception as e:
+    print(f"Ocurrió un error inesperado: {str(e)}")
+finally:
+    # Cerrar el navegador al finalizar
+    driver.quit()
