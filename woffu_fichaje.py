@@ -1,29 +1,29 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-import time
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-# Configurar el navegador (asegúrate de tener chromedriver en tu PATH)
-driver = chromedriver.exe()
+# Configurar el WebDriver (en este caso, Chrome)
+options = Options()
+options.add_argument("--headless")  # Ejecución en modo headless (sin ventana)
+driver = webdriver.Chrome(options=options)
 
-# Ir a la página de Woffu
+# Abre la URL de Woffu
 driver.get("https://volkswagen-groupservices.woffu.com/v2/personal/dashboard/user")
 
-# Maximizar la ventana
-driver.maximize_window()
+# Maximiza la ventana (no es necesario si se está ejecutando en modo headless)
+# driver.maximize_window()
 
-# Aquí añadirías el código para iniciar sesión si es necesario
-# Ejemplo:
-# username = driver.find_element(By.ID, "username")
-# password = driver.find_element(By.ID, "password")
-# username.send_keys("tu_usuario")
-# password.send_keys("tu_contraseña")
-# password.send_keys(Keys.RETURN)
+# Espera a que el elemento se cargue antes de hacer clic
+try:
+    element = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, ".sc-llcuoN"))
+    )
+    element.click()
+except Exception as e:
+    print(f"No se pudo hacer clic en el elemento: {e}")
 
-# Hacer clic en el botón de fichar
-time.sleep(5)  # Esperar a que la página cargue
-fichar_button = driver.find_element(By.CSS_SELECTOR, ".sc-llcuoN")
-fichar_button.click()
-
-# Cerrar el navegador
-time.sleep(5)
+# Cierra el navegador al finalizar
 driver.quit()
+
