@@ -13,11 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Download msedgedriver.exe
-        run: |
-          curl -o msedgedriver.zip "https://msedgedriver.azureedge.net/latest/edgedriver_win64.zip"
-          7z x msedgedriver.zip -omsedgedriver
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -29,4 +24,7 @@ jobs:
           pip install msedge-selenium-tools
 
       - name: Run Selenium script
-        run: python woffu_fichaje.py
+        run: |
+          python woffu_fichaje.py
+        env:
+          WEBDRIVER_PATH: 'C:\Carles\edgedriver_win64\msedgedriver.exe'
