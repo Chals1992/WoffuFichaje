@@ -10,7 +10,10 @@ import time
 options = Options()
 options.use_chromium = True  # Utilizar el motor Chromium en Edge
 options.add_argument("--headless")  # Ejecución en modo headless (sin ventana)
-driver = webdriver.Edge(service=Service('path/to/msedgedriver'), options=options)  # Reemplaza 'path/to/msedgedriver' con la ruta correcta a msedgedriver.exe
+
+# Reemplaza 'path/to/msedgedriver.exe' con la ruta correcta a msedgedriver.exe
+driver_path = 'path/to/msedgedriver.exe'
+driver = webdriver.Edge(executable_path=driver_path, options=options)
 
 # Abre la URL de Woffu
 driver.get("https://volkswagen-groupservices.woffu.com/v2/personal/dashboard/user")
