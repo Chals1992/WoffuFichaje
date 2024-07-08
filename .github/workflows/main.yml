@@ -7,11 +7,16 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest  # Ejecutar en entorno Windows Latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Download msedgedriver.exe
+        run: |
+          curl -o msedgedriver.exe "https://msedgedriver.azureedge.net/latest/edgedriver_win64.zip"
+          Expand-Archive -Path .\msedgedriver.exe -DestinationPath .
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -24,9 +29,4 @@ jobs:
           pip install msedge-selenium-tools
 
       - name: Run Selenium script
-        run: |
-          # Copia msedgedriver.exe desde la ruta Windows a la carpeta actual
-          cp /mnt/c/Users/W1VFOUS/OneDrive\ -\ Volkswagen\ AG/Carles_Seat/edgedriver_win64/msedgedriver.exe ./msedgedriver.exe
-
-          # Ejecutar el script Python usando msedgedriver.exe
-          python woffu_fichaje.py
+        run: python woffu_fichaje.py  # Asegúrate de que este sea el nombre correcto de tu script
