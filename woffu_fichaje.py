@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 import time
 
 # Configurar el navegador (asegúrate de tener chromedriver en tu PATH)
-driver = webdriver.Chrome()
+driver = chromedriver.exe()
 
 # Ir a la página de Woffu
 driver.get("https://volkswagen-groupservices.woffu.com/v2/personal/dashboard/user")
