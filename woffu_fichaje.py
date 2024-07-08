@@ -1,20 +1,22 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.edge.service import Service
+from selenium.webdriver.edge.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
 
-# Configurar el WebDriver (en este caso, Chrome)
+# Configura el WebDriver (en este caso, Edge)
 options = Options()
+options.use_chromium = True  # Utilizar el motor Chromium en Edge
 options.add_argument("--headless")  # Ejecución en modo headless (sin ventana)
-driver = webdriver.Chrome(options=options)
+driver = webdriver.Edge(service=Service('path/to/msedgedriver'), options=options)  # Reemplaza 'path/to/msedgedriver' con la ruta correcta a msedgedriver.exe
 
 # Abre la URL de Woffu
 driver.get("https://volkswagen-groupservices.woffu.com/v2/personal/dashboard/user")
 
-# Maximiza la ventana (no es necesario si se está ejecutando en modo headless)
-# driver.maximize_window()
+# Ajusta el tamaño de la ventana
+driver.maximize_window()
 
 # Espera a que el botón "Entrar" sea clickeable
 try:
