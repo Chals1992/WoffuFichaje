@@ -2,7 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import time
 
-# Configurar el navegador (asegúrate de tener chromedriver instalado)
+# Configurar el navegador (asegúrate de tener chromedriver en tu PATH)
 driver = webdriver.Chrome()
 
 # Ir a la página de Woffu
@@ -27,4 +27,3 @@ fichar_button.click()
 # Cerrar el navegador
 time.sleep(5)
 driver.quit()
-
