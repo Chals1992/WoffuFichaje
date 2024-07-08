@@ -15,8 +15,8 @@ jobs:
 
       - name: Download msedgedriver.exe
         run: |
-          curl -o msedgedriver.exe "https://msedgedriver.azureedge.net/latest/edgedriver_win64.zip"
-          Expand-Archive -Path .\msedgedriver.exe -DestinationPath .
+          curl -o msedgedriver.zip "https://msedgedriver.azureedge.net/latest/edgedriver_win64.zip"
+          7z x msedgedriver.zip -omsedgedriver
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -29,4 +29,4 @@ jobs:
           pip install msedge-selenium-tools
 
       - name: Run Selenium script
-        run: python woffu_fichaje.py  # Asegúrate de que este sea el nombre correcto de tu script
+        run: python woffu_fichaje.py
