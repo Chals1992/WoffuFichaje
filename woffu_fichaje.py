@@ -17,13 +17,13 @@ driver.get("https://volkswagen-groupservices.woffu.com/v2/personal/dashboard/use
 
 # Espera a que el elemento se cargue antes de hacer clic
 try:
+    # Esperar a que aparezca el botón "Entrar"
     element = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, ".sc-llcuoN"))
+        EC.element_to_be_clickable((By.XPATH, "//button[contains(.,'Entrar')]"))
     )
     element.click()
 except Exception as e:
-    print(f"No se pudo hacer clic en el elemento: {e}")
+    print(f"No se pudo hacer clic en el botón 'Entrar': {e}")
 
 # Cierra el navegador al finalizar
 driver.quit()
-
