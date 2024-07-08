@@ -11,9 +11,8 @@ options.use_chromium = True  # Usar el nuevo Microsoft Edge (Chromium)
 options.add_argument("--headless")  # Ejecutar en modo headless (sin ventana)
 options.add_argument("--disable-gpu")  # Deshabilitar GPU para evitar problemas
 
-# Configurar la ruta del archivo msedgedriver.exe
-msedgedriver_path = r"C:\Carles\edgedriver_win64\msedgedriver.exe"
-
+# Configurar la nueva ruta del archivo msedgedriver.exe
+msedgedriver_path = r"C:\Users\W1VFOUS\OneDrive - Volkswagen AG\Escritorio\edgedriver_win64\msedgedriver.exe"
 
 # Crear una instancia del controlador de Edge
 driver = Edge(executable_path=msedgedriver_path, options=options)
@@ -45,8 +44,4 @@ try:
     boton_fichar.click()
 
     # Esperar a que se complete el fichaje
-    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//div[@class='success']")))
-
-finally:
-    # Cerrar el navegador al finalizar
-    driver.quit()
+    We
