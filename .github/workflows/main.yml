@@ -25,6 +25,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install selenium
           pip install requests
+          pip install msedge-selenium-tools  # Instala msedge-selenium-tools
 
       - name: Download msedgedriver.exe
         run: |
