@@ -27,7 +27,8 @@ jobs:
           pip install requests
           pip install msedge-selenium-tools
 
-      - name: Install msedgedriver
-        run: |
-          curl https://volkswagengroup-my.sharepoint.com/:u:/r/personal/carles_casajuana1_volkswagen-groupservices_com/Documents/Carles_Seat/edgedriver_win64/msedgedriver.exe?csf=1&web=1&e=qkd8R3 -o msedgedriver.exe
-          sudo mv msed
+     - name: Download msedgedriver.exe
+  run: |
+    curl "https://volkswagengroup-my.sharepoint.com/:u:/r/personal/carles_casajuana1_volkswagen-groupservices_com/Documents/Carles_Seat/edgedriver_win64/msedgedriver.exe?csf=1&web=1&e=qkd8R3" -o msedgedriver.exe
+    sudo mv msedgedriver.exe /usr/local/bin
+    sudo chmod +x /usr/local/bin/msedgedriver.exe
