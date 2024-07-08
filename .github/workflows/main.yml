@@ -18,11 +18,10 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install requests module
-        run: pip install requests
-
-      - name: Install msedge-selenium-tools
-        run: pip install msedge-selenium-tools
+      - name: Install dependencies
+        run: |
+          pip install requests
+          pip install msedge-selenium-tools
 
       - name: Run Selenium script
         run: |
