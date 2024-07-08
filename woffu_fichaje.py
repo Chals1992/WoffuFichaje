@@ -4,14 +4,13 @@ from selenium.webdriver.edge.service import Service
 from selenium.webdriver.edge.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import time
 
 # Configura el WebDriver para Edge (Microsoft Edge)
 options = Options()
 options.add_argument("--headless")  # Ejecución en modo headless (sin ventana)
 
-# Reemplaza 'path_to_msedgedriver' con la ruta correcta a msedgedriver.exe en tu sistema
-driver_path = '/path_to_msedgedriver/msedgedriver.exe'
+# Ruta donde has descargado msedgedriver.exe
+driver_path = r'C:\Carles\edgedriver_win64\msedgedriver.exe'
 
 # Inicializa el driver de Edge
 driver = webdriver.Edge(service=Service(driver_path), options=options)
