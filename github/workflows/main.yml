@@ -17,18 +17,7 @@ jobs:
         with:
           python-version: '3.x'  # Especifica la versión de Python que necesitas
 
-      - name: Install Chrome and WebDriver
+      - name: Install Microsoft Edge and WebDriver
         run: |
-          choco install chromium
-          choco install chromedriver
-
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install selenium
-
-      - name: Run Selenium script
-        run: python woffu_fichaje.py  # Asegúrate de que este sea el nombre correcto de tu script
-
-      - name: Upload test result
-        run: echo 'Test results uploaded successfully'
+          choco install microsoft-edge-dev
+          choco instal
