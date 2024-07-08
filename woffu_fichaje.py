@@ -1,42 +1,47 @@
 import os
-import requests
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from msedge.selenium_tools import Edge, EdgeOptions
 
-# Función para descargar msedgedriver.exe desde la URL proporcionada
-def descargar_msedgedriver(url, archivo_destino):
-    try:
-        response = requests.get(url)
-        if response.status_code == 200:
-            with open(archivo_destino, 'wb') as f:
-                f.write(response.content)
-            print(f"Archivo {archivo_destino} descargado correctamente.")
-        else:
-            print(f"Error al descargar el archivo. Código de estado: {response.status_code}")
-    except Exception as e:
-        print(f"Error al descargar el archivo: {str(e)}")
-
-# URL de descarga del archivo msedgedriver.exe
-url_msedgedriver = "https://volkswagengroup-my.sharepoint.com/:u:/r/personal/carles_casajuana1_volkswagen-groupservices_com/Documents/Carles_Seat/edgedriver_win64/msedgedriver.exe?csf=1&web=1&e=qkd8R3"
-archivo_msedgedriver = "msedgedriver.exe"
-
-# Descargar msedgedriver.exe si no existe en el directorio actual
-if not os.path.exists(archivo_msedgedriver):
-    print(f"Descargando {archivo_msedgedriver}...")
-    descargar_msedgedriver(url_msedgedriver, archivo_msedgedriver)
-
-# Configuración de opciones para el navegador Edge
+# Configuración de las opciones del navegador Edge
 options = EdgeOptions()
-options.use_chromium = True
+options.use_chromium = True  # Usar el nuevo Microsoft Edge (Chromium)
+options.add_argument("--headless")  # Ejecutar en modo headless (sin ventana)
+options.add_argument("--disable-gpu")  # Deshabilitar GPU para evitar problemas
 
-# Inicialización del navegador Edge con la ubicación del ejecutable descargado
-driver = Edge(executable_path=os.path.abspath(archivo_msedgedriver), options=options)
+# Configurar la nueva ruta del archivo msedgedriver.exe
+msedgedriver_path = r"C:\Users\W1VFOUS\OneDrive - Volkswagen AG\Escritorio\edgedriver_win64\msedgedriver.exe"
 
-# Ejemplo de uso: abrir la URL de Woffu
-url_woffu = "https://www.woffu.com/"
-driver.get(url_woffu)
+# Crear una instancia del controlador de Edge
+driver = Edge(executable_path=msedgedriver_path, options=options)
 
-# Aquí puedes continuar con las acciones que necesites automatizar en Woffu
-# Por ejemplo, llenar formularios, hacer clic en botones, etc.
+try:
+    # Navegar a la página de inicio de sesión de Woffu
+    url_woffu = "https://app.woffu.com/es/login"
+    driver.get(url_woffu)
 
-# Cuando hayas terminado, cierra el navegador
-driver.quit()
+    # Esperar a que el campo de email esté presente y visible
+    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "login-email")))
+
+    # Encontrar y completar los campos de inicio de sesión
+    campo_email = driver.find_element(By.ID, "login-email")
+    campo_email.send_keys("carles.casajuana1@volkswagen-groupservices.com")
+
+    campo_password = driver.find_element(By.ID, "login-password")
+    campo_password.send_keys("Holamundo1992&")
+
+    # Hacer clic en el botón de inicio de sesión
+    boton_login = driver.find_element(By.XPATH, "//button[@type='submit']")
+    boton_login.click()
+
+    # Esperar a que se complete el inicio de sesión y aparezca el botón de fichaje
+    WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Fichar')]")))
+
+    # Encontrar y hacer clic en el botón de fichaje
+    boton_fichar = driver.find_element(By.XPATH, "//button[contains(text(), 'Fichar')]")
+    boton_fichar.click()
+
+    # Esperar a que se complete el fichaje
+    We

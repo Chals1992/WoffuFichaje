@@ -3,13 +3,11 @@ name: Selenium Test
 on:
   push:
     branches:
-      - main  # Ejecutar cuando se haga push a la rama main
-  schedule:
-    - cron: '0 8 * * *'  # Ejecutar todos los días a las 8:00 AM UTC (ajustar según tu zona horaria)
+      - main
 
 jobs:
   test:
-    runs-on: windows-latest  # Ejecutar en Windows Latest (Edge)
+    runs-on: windows-latest  # Ejecutar en entorno Windows Latest
 
     steps:
       - name: Checkout repository
@@ -22,12 +20,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install selenium
+          pip install requests
+          pip install msedge-selenium-tools
 
       - name: Run Selenium script
-        run: python woffu_fichaje.py  # Asegúrate de que este sea el nombre correcto de tu script
-
-      - name: Upload test result
-        run: echo 'Test results uploaded successfully'
-
+        run: |
+          python woffu_fichaje.py
+        env:
+          WEBDRIVER_PATH: 'C:\Carles\edgedriver_win64\msedgedriver.exe'
