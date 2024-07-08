@@ -6,7 +6,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Se ejecutará en Ubuntu Latest
+    runs-on: windows-latest  # Se ejecutará en Windows Latest
 
     steps:
       - name: Checkout repository
@@ -19,9 +19,8 @@ jobs:
 
       - name: Install Chrome and WebDriver
         run: |
-          sudo apt-get update
-          sudo apt-get install -y chromium-browser
-          sudo apt-get install -y chromium-chromedriver
+          choco install chromium
+          choco install chromedriver
 
       - name: Install dependencies
         run: |
