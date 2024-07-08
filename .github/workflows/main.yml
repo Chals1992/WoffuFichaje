@@ -1,6 +1,9 @@
-name: Run Selenium Test Daily
+name: Selenium Test
 
 on:
+  push:
+    branches:
+      - main  # Ejecutar cuando se haga push a la rama main
   schedule:
     - cron: '0 8 * * *'  # Ejecutar todos los días a las 8:00 AM UTC (ajustar según tu zona horaria)
 
@@ -17,13 +20,14 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install Selenium and dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install selenium
 
       - name: Run Selenium script
-        run: python woffu_fichaje.py
+        run: python woffu_fichaje.py  # Asegúrate de que este sea el nombre correcto de tu script
 
       - name: Upload test result
         run: echo 'Test results uploaded successfully'
+
