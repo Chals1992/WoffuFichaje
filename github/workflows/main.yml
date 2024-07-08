@@ -1,13 +1,13 @@
-name: Selenium Test
+name: Selenium Tests
 
 on:
   push:
     branches:
-      - main  # Cambia 'main' por el nombre de tu rama principal si es diferente
+      - main  # Cambia 'main' por tu rama principal si es diferente
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Puedes cambiar la versión de Ubuntu según tus necesidades
+    runs-on: ubuntu-latest  # Puedes elegir otra versión de Ubuntu o incluso Windows si es necesario
 
     steps:
     - name: Checkout repository
@@ -18,14 +18,20 @@ jobs:
       with:
         python-version: '3.x'  # Especifica la versión de Python que necesitas
 
+    - name: Install Chrome and WebDriver
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y chromium-browser
+        sudo apt-get install -y chromium-chromedriver
+
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install selenium
 
-    - name: Run Selenium script
+    - name: Run Selenium tests
       run: |
-        python woffu_fichaje.py  # Asegúrate de que este sea el nombre correcto de tu script
+        python woffu_fichaje.py  # Reemplaza con el nombre de tu script Python
 
     - name: Upload test result
       run: echo 'Test results uploaded successfully'
