@@ -13,10 +13,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Download msedgedriver.exe
-        run: |
-          curl -L -o msedgedriver.exe "https://url-del-archivo-msedgedriver.exe"
-
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -28,4 +24,9 @@ jobs:
           pip install msedge-selenium-tools
 
       - name: Run Selenium script
-        run: python woffu_fichaje.py
+        run: |
+          # Copia msedgedriver.exe desde la ruta Windows a la carpeta actual
+          cp /mnt/c/Users/W1VFOUS/OneDrive\ -\ Volkswagen\ AG/Carles_Seat/edgedriver_win64/msedgedriver.exe ./msedgedriver.exe
+
+          # Ejecutar el script Python usando msedgedriver.exe
+          python woffu_fichaje.py
