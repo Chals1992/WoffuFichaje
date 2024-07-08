@@ -10,10 +10,10 @@ options = Options()
 options.add_argument("--headless")  # Ejecución en modo headless (sin ventana)
 
 # Ruta donde has descargado msedgedriver.exe
-driver_path = r'C:\Carles\edgedriver_win64\msedgedriver.exe'
+driver_path = r'C:\Users\W1VFOUS\OneDrive - Volkswagen AG\Carles_Seat\edgedriver_win64\msedgedriver.exe'
 
 # Inicializa el driver de Edge
-driver = webdriver.Edge(service=Service(driver_path), options=options)
+driver = webdriver.Edge(executable_path=driver_path, options=options)
 
 try:
     # Abre la URL de Woffu
