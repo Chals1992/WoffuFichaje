@@ -1,29 +1,27 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-import time
+name: Run Selenium Test Daily
 
-# Configurar el navegador (asegúrate de tener chromedriver instalado)
-driver = webdriver.Chrome()
+on:
+  schedule:
+    - cron: '0 8 * * *' # Esto ejecuta la acción todos los días a las 08:00 UTC
 
-# Ir a la página de Woffu
-driver.get("https://volkswagen-groupservices.woffu.com/v2/personal/dashboard/user")
+jobs:
+  run-selenium:
+    runs-on: ubuntu-latest
 
-# Maximizar la ventana
-driver.maximize_window()
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-# Aquí añadirías el código para iniciar sesión si es necesario
-# Ejemplo:
-# username = driver.find_element(By.ID, "username")
-# password = driver.find_element(By.ID, "password")
-# username.send_keys("tu_usuario")
-# password.send_keys("tu_contraseña")
-# password.send_keys(Keys.RETURN)
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-# Hacer clic en el botón de fichar
-time.sleep(5)  # Esperar a que la página cargue
-fichar_button = driver.find_element(By.CSS_SELECTOR, ".sc-llcuoN")
-fichar_button.click()
+      - name: Install dependencies
+        run: |
+          pip install selenium
+          pip install chromedriver-binary
 
-# Cerrar el navegador
-time.sleep(5)
-driver.quit()
+      - name: Run Selenium script
+        run: |
+          python woffu_fichaje.py
