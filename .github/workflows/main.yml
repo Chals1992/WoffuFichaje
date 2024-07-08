@@ -23,18 +23,13 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install selenium
-          pip install requests
-          pip install msedge-selenium-tools  # Instala msedge-selenium-tools
+          pip install selenium requests msedge-selenium-tools
 
-      - name: Download msedgedriver.exe
-        run: |
-          curl -o msedgedriver.exe "https://volkswagengroup-my.sharepoint.com/:u:/r/personal/carles_casajuana1_volkswagen-groupservices_com/Documents/Carles_Seat/edgedriver_win64/msedgedriver.exe?csf=1&web=1&e=qkd8R3"
-          sudo mv msedgedriver.exe /usr/local/bin
-          sudo chmod +x /usr/local/bin/msedgedriver.exe
+      - name: Download msedgedriver
+        run: curl -o msedgedriver.exe "https://volkswagengroup-my.sharepoint.com/:u:/r/personal/carles_casajuana1_volkswagen-groupservices_com/Documents/Carles_Seat/edgedriver_win64/msedgedriver.exe?csf=1&web=1&e=qkd8R3"
 
       - name: Run Selenium script
-        run: python woffu_fichaje.py  # Asegúrate de que este sea el nombre correcto de tu script
+        run: python woffu_fichaje.py
 
       - name: Upload test result
         run: echo 'Test results uploaded successfully'
