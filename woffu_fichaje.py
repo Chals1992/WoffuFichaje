@@ -1,7 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.edge.service import Service
+from selenium.webdriver.edge.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import time
@@ -14,7 +14,7 @@ options.add_argument("--headless")  # Ejecución en modo headless (sin ventana)
 driver_path = '/path_to_msedgedriver/msedgedriver.exe'
 
 # Inicializa el driver de Edge
-driver = webdriver.Edge(executable_path=driver_path, options=options)
+driver = webdriver.Edge(service=Service(driver_path), options=options)
 
 try:
     # Abre la URL de Woffu
