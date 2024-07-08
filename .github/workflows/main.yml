@@ -1,31 +1,25 @@
-name: Selenium Test
+name: Automatizar Fichaje
 
 on:
-  push:
-    branches:
-      - main
+  schedule:
+    - cron: '0 8 * * *'  # Ejecutar todos los días a las 08:00
 
 jobs:
-  test:
-    runs-on: windows-latest  # Ejecutar en entorno Windows Latest
+  fichaje:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout del Repositorio
         uses: actions/checkout@v2
 
-      - name: Set up Python
+      - name: Configurar Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.x'  # Selecciona la versión de Python que necesites
 
-      - name: Install requests module
-        run: pip install requests
-
-      - name: Install msedge-selenium-tools
-        run: pip install msedge-selenium-tools
-
-      - name: Run Selenium script
+      - name: Instalar Dependencias
         run: |
-          python woffu_fichaje.py
-        env:
-          WEBDRIVER_PATH: 'C:\Carles\edgedriver_win64\msedgedriver.exe'
+          pip install -r requirements.txt  # Asegúrate de tener un requirements.txt con las dependencias necesarias
+
+      - name: Ejecutar Script de Fichaje
+        run: python fichaje.py  # Reemplaza 'fichaje.py' por el nombre de tu script de fichaje
