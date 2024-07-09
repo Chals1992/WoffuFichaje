@@ -22,4 +22,4 @@ jobs:
           pip install -r requirements.txt  # Asegúrate de tener un requirements.txt con las dependencias necesarias
 
       - name: Ejecutar Script de Fichaje
-        run: python fichaje.py  # Reemplaza 'fichaje.py' por el nombre de tu script de fichaje
+        run: python woffu_fichaje.py  # Asegúrate de que este nombre coincida con tu script de fichaje
