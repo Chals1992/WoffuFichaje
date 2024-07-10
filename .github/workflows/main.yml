@@ -29,8 +29,8 @@ jobs:
           wget https://msedgedriver.azureedge.net/102.0.1245.41/edgedriver_linux64.zip -O msedgedriver.zip
           sudo apt-get install unzip
           unzip msedgedriver.zip -d /usr/local/bin/
-          sudo mv /usr/local/bin/msedgedriver /usr/local/bin/msedgedriver.exe
-          sudo chmod +x /usr/local/bin/msedgedriver.exe
+          sudo mv /usr/local/bin/msedgedriver /usr/local/bin/msedgedriver
+          sudo chmod +x /usr/local/bin/msedgedriver
 
       - name: Run Selenium script
         env:
