@@ -26,9 +26,10 @@ jobs:
 
       - name: Download and install Microsoft Edge Driver
         run: |
-          wget https://msedgedriver.azureedge.net/102.0.1245.41/edgedriver_linux64.zip -O msedgedriver.zip
           sudo apt-get install unzip
-          unzip msedgedriver.zip -d /usr/local/bin/
+          wget https://msedgedriver.azureedge.net/125.0.2535.92/edgedriver_linux64.zip
+          unzip edgedriver_linux64.zip
+          sudo mv msedgedriver /usr/local/bin/msedgedriver
           sudo chmod +x /usr/local/bin/msedgedriver
 
       - name: Run Selenium script
