@@ -12,8 +12,8 @@ options.use_chromium = True  # Usar el nuevo Microsoft Edge (Chromium)
 options.add_argument("--headless")  # Ejecutar en modo headless (sin ventana)
 options.add_argument("--disable-gpu")  # Deshabilitar GPU para evitar problemas
 
-# Configurar la nueva ruta del archivo msedgedriver.exe
-msedgedriver_path = "/usr/local/bin/msedgedriver"
+# Especifica la ruta al archivo msedgedriver
+msedgedriver_path = "/usr/local/bin/msedgedriver.exe"
 
 # Crear una instancia del controlador de Edge
 driver = Edge(executable_path=msedgedriver_path, options=options)
@@ -28,10 +28,10 @@ try:
 
     # Encontrar y completar los campos de inicio de sesión
     campo_email = driver.find_element(By.ID, "login-email")
-    campo_email.send_keys("carles.casajuana1@volkswagen-groupservices.com")
+    campo_email.send_keys(os.environ["WOFFU_EMAIL"])
 
     campo_password = driver.find_element(By.ID, "login-password")
-    campo_password.send_keys("Holamundo1992&")
+    campo_password.send_keys(os.environ["WOFFU_PASSWORD"])
 
     # Hacer clic en el botón de inicio de sesión
     boton_login = driver.find_element(By.XPATH, "//button[@type='submit']")
@@ -53,4 +53,3 @@ except Exception as e:
     print(f"Ocurrió un error inesperado: {str(e)}")
 finally:
     # Cerrar el navegador al finalizar
-    driver.quit()
