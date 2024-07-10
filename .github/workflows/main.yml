@@ -38,5 +38,4 @@ jobs:
         env:
           WOFFU_EMAIL: ${{ secrets.WOFFU_EMAIL }}
           WOFFU_PASSWORD: ${{ secrets.WOFFU_PASSWORD }}
-        run: |
-          python auto_fichar.py
+        run: python auto_fichar.py
