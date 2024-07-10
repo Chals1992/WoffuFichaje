@@ -33,4 +33,7 @@ jobs:
           sudo chmod +x /usr/local/bin/msedgedriver.exe
 
       - name: Run Selenium script
+        env:
+          WOFFU_EMAIL: ${{ secrets.WOFFU_EMAIL }}
+          WOFFU_PASSWORD: ${{ secrets.WOFFU_PASSWORD }}
         run: python auto_fichar.py
