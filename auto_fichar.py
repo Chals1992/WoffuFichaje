@@ -3,20 +3,19 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from msedge.selenium_tools import Edge, EdgeOptions
 from selenium.common.exceptions import TimeoutException
 
 # Configuración de las opciones del navegador Edge
-options = EdgeOptions()
+options = webdriver.EdgeOptions()
 options.use_chromium = True  # Usar el nuevo Microsoft Edge (Chromium)
 options.add_argument("--headless")  # Ejecutar en modo headless (sin ventana)
 options.add_argument("--disable-gpu")  # Deshabilitar GPU para evitar problemas
 
 # Especifica la ruta al archivo msedgedriver
-msedgedriver_path = "/usr/local/bin/msedgedriver.exe"
+msedgedriver_path = "/usr/local/bin/msedgedriver"
 
 # Crear una instancia del controlador de Edge
-driver = Edge(executable_path=msedgedriver_path, options=options)
+driver = webdriver.Edge(executable_path=msedgedriver_path, options=options)
 
 try:
     # Navegar a la página de inicio de sesión de Woffu
