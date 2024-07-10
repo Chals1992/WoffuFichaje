@@ -3,13 +3,13 @@ name: Auto Fichar en Woffu
 on:
   push:
     branches:
-      - main
+      - main  # Cambiar por la rama principal de tu repositorio
   pull_request:
     branches:
-      - main
+      - main  # Cambiar por la rama principal de tu repositorio
 
 jobs:
-  build:
+  auto-fichar:
     runs-on: ubuntu-latest
 
     steps:
