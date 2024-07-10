@@ -1,25 +1,38 @@
-name: Automatizar Fichaje
+name: Selenium Automation
 
 on:
-  schedule:
-    - cron: '0 8 * * *'  # Ejecutar todos los días a las 08:00
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  fichaje:
+  selenium-job:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout del Repositorio
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Configurar Python
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'  # Selecciona la versión de Python que necesites
+          python-version: '3.10' # Especifica la versión de Python
 
-      - name: Instalar Dependencias
+      - name: Install dependencies
         run: |
-          pip install -r requirements.txt  # Asegúrate de tener un requirements.txt con las dependencias necesarias
+          python -m pip install --upgrade pip
+          pip install selenium
 
-      - name: Ejecutar Script de Fichaje
-        run: python woffu_fichaje.py  # Asegúrate de que este nombre coincida con tu script de fichaje
+      - name: Download and set up ChromeDriver
+        run: |
+          wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          chmod +x chromedriver
+          sudo mv chromedriver /usr/local/bin/
+
+      - name: Run Selenium script
+        run: |
+          python auto_fichar.py
