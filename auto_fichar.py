@@ -3,20 +3,22 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from msedge.selenium_tools import Edge, EdgeOptions
 from selenium.common.exceptions import TimeoutException
 
 # Configuración de las opciones del navegador Edge
-options = EdgeOptions()
+options = webdriver.EdgeOptions()
 options.use_chromium = True  # Usar el nuevo Microsoft Edge (Chromium)
 options.add_argument("--headless")  # Ejecutar en modo headless (sin ventana)
 options.add_argument("--disable-gpu")  # Deshabilitar GPU para evitar problemas
 
-# Configurar la nueva ruta del archivo msedgedriver.exe
+# Especifica la ruta al archivo msedgedriver
 msedgedriver_path = "/usr/local/bin/msedgedriver"
 
+# Configurar el servicio de Edge con la ruta del msedgedriver
+service = webdriver.EdgeService(executable_path=msedgedriver_path)
+
 # Crear una instancia del controlador de Edge
-driver = Edge(executable_path=msedgedriver_path, options=options)
+driver = webdriver.Edge(service=service, options=options)
 
 try:
     # Navegar a la página de inicio de sesión de Woffu
@@ -28,10 +30,10 @@ try:
 
     # Encontrar y completar los campos de inicio de sesión
     campo_email = driver.find_element(By.ID, "login-email")
-    campo_email.send_keys("carles.casajuana1@volkswagen-groupservices.com")
+    campo_email.send_keys(os.environ["WOFFU_EMAIL"])
 
     campo_password = driver.find_element(By.ID, "login-password")
-    campo_password.send_keys("Holamundo1992&")
+    campo_password.send_keys(os.environ["WOFFU_PASSWORD"])
 
     # Hacer clic en el botón de inicio de sesión
     boton_login = driver.find_element(By.XPATH, "//button[@type='submit']")
