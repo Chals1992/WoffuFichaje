@@ -12,7 +12,7 @@ options.use_chromium = True  # Usar el nuevo Microsoft Edge (Chromium)
 options.add_argument("--headless")  # Ejecutar en modo headless (sin ventana)
 options.add_argument("--disable-gpu")  # Deshabilitar GPU para evitar problemas
 
-# Configurar la ruta del archivo msedgedriver
+# Configurar la nueva ruta del archivo msedgedriver.exe
 msedgedriver_path = "/usr/local/bin/msedgedriver"
 
 # Crear una instancia del controlador de Edge
