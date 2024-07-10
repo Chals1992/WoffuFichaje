@@ -30,10 +30,10 @@ try:
 
     # Encontrar y completar los campos de inicio de sesión
     campo_email = driver.find_element(By.ID, "login-email")
-    campo_email.send_keys(os.environ["WOFFU_EMAIL"])
+    campo_email.send_keys(os.environ["carles.casajuana1@volkswagen-groupservices.com"])
 
     campo_password = driver.find_element(By.ID, "login-password")
-    campo_password.send_keys(os.environ["WOFFU_PASSWORD"])
+    campo_password.send_keys(os.environ["Holamundo1992&"])
 
     # Hacer clic en el botón de inicio de sesión
     boton_login = driver.find_element(By.XPATH, "//button[@type='submit']")
