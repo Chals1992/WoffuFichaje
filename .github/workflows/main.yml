@@ -3,10 +3,10 @@ name: Auto Fichar en Woffu
 on:
   push:
     branches:
-      - main
+      - main  # Cambiar por la rama principal de tu repositorio
   pull_request:
     branches:
-      - main
+      - main  # Cambiar por la rama principal de tu repositorio
   workflow_dispatch:
 
 jobs:
@@ -38,4 +38,5 @@ jobs:
         env:
           WOFFU_EMAIL: ${{ secrets.WOFFU_EMAIL }}
           WOFFU_PASSWORD: ${{ secrets.WOFFU_PASSWORD }}
-        run: python auto_fichar.py
+        run: |
+          python auto_fichar.py
