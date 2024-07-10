@@ -23,11 +23,11 @@ driver = webdriver.Edge(service=service, options=options)
 
 try:
     # Navegar a la página de inicio de sesión de Woffu
-    url_woffu = "https://app.woffu.com/es/login"
+    url_woffu = "https://app.woffu.com/v2/login"
     driver.get(url_woffu)
 
     # Esperar a que el campo de email esté presente y visible
-    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.ID, "login-email")))
+    WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.ID, "login-email")))
 
     # Encontrar y completar los campos de inicio de sesión
     campo_email = driver.find_element(By.ID, "login-email")
@@ -48,7 +48,7 @@ try:
     boton_fichar.click()
 
     # Esperar a que se complete el fichaje
-    WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.XPATH, "//div[@class='success']")))
+    WebDriverWait(driver, 20).until(EC.visibility_of_element_located((By.XPATH, "//div[@class='success']")))
 
 except TimeoutException:
     print("Tiempo de espera excedido. No se pudo completar la acción.")
