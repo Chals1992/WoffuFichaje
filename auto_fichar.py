@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.edge.service import Service as EdgeService
 
 # Configuración de las opciones del navegador Edge
 options = webdriver.EdgeOptions()
@@ -14,8 +15,11 @@ options.add_argument("--disable-gpu")  # Deshabilitar GPU para evitar problemas
 # Especifica la ruta al archivo msedgedriver
 msedgedriver_path = "/usr/local/bin/msedgedriver"
 
+# Configurar el servicio de Edge con la ruta del msedgedriver
+service = EdgeService(executable_path=msedgedriver_path)
+
 # Crear una instancia del controlador de Edge
-driver = webdriver.Edge(executable_path=msedgedriver_path, options=options)
+driver = webdriver.Edge(service=service, options=options)
 
 try:
     # Navegar a la página de inicio de sesión de Woffu
