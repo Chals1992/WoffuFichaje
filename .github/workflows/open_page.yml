@@ -5,6 +5,7 @@ on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -12,20 +13,21 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'  # Ajusta la versión de Python según tu necesidad
+          python-version: '3.x'  # Reemplaza '3.x' con la versión específica de Python que necesites
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install selenium
+          pip install selenium msedge-selenium-tools
 
-      - name: Download Microsoft Edge WebDriver
+      - name: Download Microsoft Edge
         run: |
-          curl -sS -o msedgedriver.zip https://msedgedriver.azureedge.net/latest/edgedriver_linux64.zip
-          sudo unzip msedgedriver.zip -d /usr/local/bin
-          sudo chmod +x /usr/local/bin/msedgedriver
+          curl -LO "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/2fe75945-e16c-407b-9a2d-267cc31f3d85/edgedriver_linux64.zip"
+          sudo apt-get install -y unzip
+          unzip edgedriver_linux64.zip -d /usr/local/bin/
 
       - name: Run Selenium script
+        env:
+          MSEDGEDRIVER_PATH: /usr/local/bin/msedgedriver
         run: |
-          python path/to/your/selenium/script.py  # Ajusta la ruta al script de Selenium
-
+          python auto_fichar.py
