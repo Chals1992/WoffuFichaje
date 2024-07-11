@@ -25,7 +25,6 @@ jobs:
           curl -LO "https://msedgedriver.azureedge.net/116.0.1938.62/edgedriver_linux64.zip"
           sudo apt-get install -y unzip
           unzip edgedriver_linux64.zip -d /usr/local/bin/
-          sudo mv /usr/local/bin/msedgedriver /usr/local/bin/msedgedriver
 
       - name: Run Selenium script
         env:
