@@ -1,16 +1,14 @@
-from selenium import webdriver
-from selenium.webdriver.edge.service import Service
-from selenium.webdriver.edge.options import Options
+from msedge.selenium_tools import Edge, EdgeOptions
 
-# Configuración del WebDriver de Edge
-options = Options()
-options.add_argument('--headless')  # Ejecutar Edge en modo headless
-options.add_argument('--no-sandbox')
-options.add_argument('--disable-dev-shm-usage')
+options = EdgeOptions()
+options.use_chromium = True
+options.add_argument("--headless")  # Ejecutar en modo headless
+options.add_argument("--disable-gpu")
+options.add_argument("--no-sandbox")
 
-service = Service('/usr/local/bin/msedgedriver')  # Ruta donde se descargará msedgedriver
-
-driver = webdriver.Edge(service=service, options=options)
+driver = Edge(executable_path='/usr/local/bin/edgedriver', options=options)
 driver.get('https://www.google.com')
-print(driver.title)
+
+print(driver.title)  # Imprimir el título de la página para verificar que se abrió correctamente
+
 driver.quit()
