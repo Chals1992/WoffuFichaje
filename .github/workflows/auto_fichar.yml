@@ -1,18 +1,10 @@
-name: Auto Fichar en Woffu
+name: Selenium Test with Microsoft Edge
 
-on:
-  push:
-    branches:
-      - main  # Cambiar por la rama principal de tu repositorio
-  pull_request:
-    branches:
-      - main  # Cambiar por la rama principal de tu repositorio
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
-  run-selenium:
+  test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -20,25 +12,19 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'
+          python-version: '3.8'  # Ajusta la versión de Python según tu necesidad
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install selenium requests
+          pip install selenium
 
-      - name: Download and setup Chrome WebDriver
+      - name: Download Microsoft Edge WebDriver
         run: |
-          sudo apt-get update
-          sudo apt-get install -y wget unzip
-          wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/chromedriver
-          sudo chmod +x /usr/local/bin/chromedriver
-          sudo apt-get install -y google-chrome-stable
+          curl -sS -o msedgedriver.zip https://msedgedriver.azureedge.net/latest/edgedriver_linux64.zip
+          sudo unzip msedgedriver.zip -d /usr/local/bin
+          sudo chmod +x /usr/local/bin/msedgedriver
 
       - name: Run Selenium script
-        env:
-          WOFFU_EMAIL: ${{ secrets.WOFFU_EMAIL }}
-          WOFFU_PASSWORD: ${{ secrets.WOFFU_PASSWORD }}
-        run: python auto_fichar.py
+        run: |
+          python path/to/your/selenium/script.py  # Ajusta la ruta al script de Selenium
