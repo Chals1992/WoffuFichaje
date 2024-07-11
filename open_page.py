@@ -12,4 +12,3 @@ driver.get('https://www.google.com')
 print(driver.title)  # Imprimir el título de la página para verificar que se abrió correctamente
 
 driver.quit()
-
