@@ -10,7 +10,7 @@ options.use_chromium = True
 driver = Edge(options=options)
 
 # Abrir una página web
-url = "https://www.google.com"  # Reemplaza con la URL que deseas abrir
+url = "https://www.ejemplo.com"  # Reemplaza con la URL que deseas abrir
 driver.get(url)
 
 # Esperar unos segundos (opcional)
