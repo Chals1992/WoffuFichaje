@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   test:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -13,22 +13,25 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.10'  # Reemplaza '3.x' con la versión específica de Python que necesites
+          python-version: '3.x'  # Reemplaza '3.x' con la versión específica de Python que necesites
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install selenium msedge-selenium-tools
+          pip install selenium
 
       - name: Download Microsoft Edge WebDriver
         run: |
-          Invoke-WebRequest -Uri "https://msedgedriver.azureedge.net/latest/edgedriver_win64.zip" -OutFile msedgedriver.zip
-          Expand-Archive -Path msedgedriver.zip -DestinationPath $env:RUNNER_TEMP
+          curl -sS -o msedgedriver.zip https://msedgedriver.azureedge.net/latest/edgedriver_linux64.zip
+
+      - name: Unzip Microsoft Edge WebDriver
+        run: |
+          sudo apt-get install -y unzip
+          unzip -o msedgedriver.zip -d $RUNNER_TEMP
 
       - name: Set WebDriver Path
         run: |
-          $edgedriverPath = Join-Path $env:RUNNER_TEMP "msedgedriver.exe"
-          echo "::set-env name=PATH_TO_EDGE_DRIVER::$edgedriverPath"
+          echo "::set-env name=PATH_TO_EDGE_DRIVER::$RUNNER_TEMP/msedgedriver"
 
       - name: Run Selenium script
         env:
