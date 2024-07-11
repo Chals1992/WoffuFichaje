@@ -11,6 +11,6 @@ options.add_argument('--disable-dev-shm-usage')
 service = Service('/usr/local/bin/msedgedriver')  # Ruta donde se descargará msedgedriver
 
 driver = webdriver.Edge(service=service, options=options)
-driver.get('https://www.example.com')
+driver.get('https://www.google.com')
 print(driver.title)
 driver.quit()
