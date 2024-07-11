@@ -9,7 +9,7 @@ from selenium.common.exceptions import TimeoutException
 
 # Configuración de las opciones del navegador Edge (Chromium)
 options = Options()
-options.add_argument("--headless")  # Ejecutar en modo headless (sin ventana)
+options.headless = True  # Ejecutar en modo headless (sin ventana)
 options.add_argument("--disable-gpu")  # Deshabilitar GPU para evitar problemas
 
 # Especifica la ruta al archivo msedgedriver
