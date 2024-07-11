@@ -1,41 +1,29 @@
-name: Abrir página web con Selenium en Edge
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 
-on:
-  push:
-    branches:
-      - main  # Cambiar por la rama principal de tu repositorio
-  pull_request:
-    branches:
-      - main  # Cambiar por la rama principal de tu repositorio
-  workflow_dispatch:
+# Configuración de las opciones del navegador Chrome
+options = Options()
+options.add_argument("--headless")  # Ejecutar en modo headless (sin ventana)
+options.add_argument("--disable-gpu")
+options.add_argument("--no-sandbox")
+options.add_argument("--disable-dev-shm-usage")
 
-jobs:
-  run-selenium:
-    runs-on: ubuntu-latest
+# Especifica la ruta al archivo chromedriver
+chromedriver_path = "/usr/local/bin/chromedriver"
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+# Configurar el servicio de Chrome con la ruta del chromedriver
+service = Service(executable_path=chromedriver_path)
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.8'
+# Espera antes de crear el controlador de Chrome
+time.sleep(10)  # Puedes ajustar el tiempo de espera según sea necesario
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install selenium
+# Crear una instancia del controlador de Chrome
+driver = webdriver.Chrome(service=service, options=options)
 
-      - name: Download and setup Edge WebDriver
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y wget unzip
-          wget https://msedgedriver.azureedge.net/114.0.1823.67/edgedriver_linux64.zip
-          unzip edgedriver_linux64.zip
-          sudo mv msedgedriver /usr/local/bin/msedgedriver
-          sudo chmod +x /usr/local/bin/msedgedriver
-          sudo apt-get install -y microsoft-edge-stable
+# Ejemplo de uso: abrir una página web
+driver.get("https://www.example.com")
 
-      - name: Run Selenium script
-        run: python open_page_edge.py
+# Cerrar el navegador al finalizar
+driver.quit()
