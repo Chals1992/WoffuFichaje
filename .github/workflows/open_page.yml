@@ -22,13 +22,13 @@ jobs:
 
       - name: Download Microsoft Edge Driver
         run: |
-          curl -LO "https://msedge.sf.dl.delivery.mp.microsoft.com/filestreamingservice/files/2fe75945-e16c-407b-9a2d-267cc31f3d85/edgedriver_linux64.zip"
+          curl -LO "https://msedgedriver.azureedge.net/116.0.1938.62/edgedriver_linux64.zip"
           sudo apt-get install -y unzip
           unzip edgedriver_linux64.zip -d /usr/local/bin/
-          sudo mv /usr/local/bin/msedgedriver /usr/local/bin/edgedriver
+          sudo mv /usr/local/bin/msedgedriver /usr/local/bin/msedgedriver
 
       - name: Run Selenium script
         env:
-          MSEDGEDRIVER_PATH: /usr/local/bin/edgedriver
+          MSEDGEDRIVER_PATH: /usr/local/bin/msedgedriver
         run: |
           python open_page.py
