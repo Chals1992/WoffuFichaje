@@ -25,7 +25,9 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install selenium msedge-selenium-tools
+          pip install selenium
+          pip install requests
+          pip install msedge-selenium-tools
 
       - name: Download and setup Edge WebDriver
         run: |
