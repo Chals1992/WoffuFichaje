@@ -27,12 +27,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install selenium requests
 
-      - name: Download and setup Edge WebDriver
+      - name: Download and setup Chrome WebDriver
         run: |
-          wget https://msedgedriver.azureedge.net/125.0.2535.92/edgedriver_linux64.zip
-          unzip edgedriver_linux64.zip
-          sudo mv msedgedriver /usr/local/bin/msedgedriver
-          sudo chmod +x /usr/local/bin/msedgedriver
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
+          unzip chromedriver_linux64.zip
+          sudo mv chromedriver /usr/local/bin/chromedriver
+          sudo chmod +x /usr/local/bin/chromedriver
+          sudo apt-get install -y chromium-browser
 
       - name: Run Selenium script
         env:
