@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
-# Configurar las opciones de Chrome
+# Opciones de Chrome
 options = Options()
 options.add_argument("--headless")  # Ejecutar en modo headless (sin ventana)
 options.add_argument("--disable-gpu")
@@ -11,7 +11,7 @@ options.add_argument("--no-sandbox")
 options.add_argument("--disable-dev-shm-usage")
 
 # Ruta al archivo chromedriver
-chromedriver_path = "/usr/local/bin/chromedriver"
+chromedriver_path = "/path/to/your/chromedriver"
 
 # Configurar el servicio de Chrome con la ruta del chromedriver
 service = Service(executable_path=chromedriver_path)
