@@ -11,6 +11,8 @@ from selenium.common.exceptions import TimeoutException
 options = Options()
 options.headless = True  # Ejecutar en modo headless (sin ventana)
 options.add_argument("--disable-gpu")  # Deshabilitar GPU para evitar problemas
+options.add_argument("--no-sandbox")  # Añadir no-sandbox
+options.add_argument("--disable-dev-shm-usage")  # Deshabilitar el uso compartido de memoria
 
 # Especifica la ruta al archivo chromedriver
 chromedriver_path = "/usr/local/bin/chromedriver"
