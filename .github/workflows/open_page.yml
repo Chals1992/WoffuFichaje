@@ -1,4 +1,4 @@
-name: Abrir página web con Selenium
+name: Abrir página web con Selenium en Edge
 
 on:
   push:
@@ -27,15 +27,15 @@ jobs:
           python -m pip install --upgrade pip
           pip install selenium
 
-      - name: Download and setup Chrome WebDriver
+      - name: Download and setup Edge WebDriver
         run: |
           sudo apt-get update
           sudo apt-get install -y wget unzip
-          wget https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip
-          unzip chromedriver_linux64.zip
-          sudo mv chromedriver /usr/local/bin/chromedriver
-          sudo chmod +x /usr/local/bin/chromedriver
-          sudo apt-get install -y google-chrome-stable
+          wget https://msedgedriver.azureedge.net/114.0.1823.67/edgedriver_linux64.zip
+          unzip edgedriver_linux64.zip
+          sudo mv msedgedriver /usr/local/bin/msedgedriver
+          sudo chmod +x /usr/local/bin/msedgedriver
+          sudo apt-get install -y microsoft-edge-stable
 
       - name: Run Selenium script
-        run: python open_page.py
+        run: python open_page_edge.py
