@@ -1,9 +1,9 @@
-name: Selenium Test with Microsoft Edge
+name: Open Google Page with Microsoft Edge
 
 on: [push, pull_request]
 
 jobs:
-  test:
+  open-page:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,4 +31,4 @@ jobs:
         env:
           MSEDGEDRIVER_PATH: /usr/local/bin/edgedriver
         run: |
-          python auto_fichar.py
+          python open_page.py
