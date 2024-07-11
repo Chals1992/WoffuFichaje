@@ -55,4 +55,5 @@ except TimeoutException:
 except Exception as e:
     print(f"Ocurrió un error inesperado: {str(e)}")
 finally:
-    # Cerrar el 
+    # Cerrar el navegador al finalizar
+    driver.quit()
