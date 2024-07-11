@@ -1,25 +1,41 @@
-from selenium import webdriver
-from selenium.webdriver.edge.service import Service
-from selenium.webdriver.edge.options import Options
+name: Abrir página web con Selenium en Edge
 
-# Configuración de las opciones del navegador Edge
-options = Options()
-options.add_argument("--headless")  # Ejecutar en modo headless (sin ventana)
-options.add_argument("--disable-gpu")
-options.add_argument("--no-sandbox")
-options.add_argument("--disable-dev-shm-usage")
+on:
+  push:
+    branches:
+      - main  # Cambiar por la rama principal de tu repositorio
+  pull_request:
+    branches:
+      - main  # Cambiar por la rama principal de tu repositorio
+  workflow_dispatch:
 
-# Especifica la ruta al archivo msedgedriver
-msedgedriver_path = "/usr/local/bin/msedgedriver"
+jobs:
+  run-selenium:
+    runs-on: ubuntu-latest
 
-# Configurar el servicio de Edge con la ruta del msedgedriver
-service = Service(executable_path=msedgedriver_path)
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-# Crear una instancia del controlador de Edge
-driver = webdriver.Edge(service=service, options=options)
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
 
-# Navegar a la página web
-driver.get("https://volkswagen-groupservices.woffu.com/v2/personal/dashboard/user")
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium
 
-# Cerrar el navegador al finalizar
-driver.quit()
+      - name: Download and setup Edge WebDriver
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget unzip
+          wget https://msedgedriver.azureedge.net/114.0.1823.67/edgedriver_linux64.zip
+          unzip edgedriver_linux64.zip
+          sudo mv msedgedriver /usr/local/bin/msedgedriver
+          sudo chmod +x /usr/local/bin/msedgedriver
+          sudo apt-get install -y microsoft-edge-stable
+
+      - name: Run Selenium script
+        run: python open_page_edge.py
