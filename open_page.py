@@ -1,20 +1,24 @@
-# main.py
-from msedge.selenium_tools import Edge, EdgeOptions
-import time
+from selenium import webdriver
+from selenium.webdriver.edge.service import Service as EdgeService
+from selenium.webdriver.edge.options import Options
 
-# Configurar las opciones del navegador Edge
-options = EdgeOptions()
-options.use_chromium = True
+# Configurar opciones de Microsoft Edge
+options = Options()
+options.add_argument('--headless')  # Ejecutar en modo headless, sin interfaz gráfica
+options.add_argument('--no-sandbox')
+options.add_argument('--disable-dev-shm-usage')
 
-# Iniciar el navegador Edge
-driver = Edge(options=options)
+# Configurar el servicio de Microsoft Edge
+service = EdgeService(executable_path='msedgedriver')
+
+# Inicializar el WebDriver de Microsoft Edge
+driver = webdriver.Edge(service=service, options=options)
 
 # Abrir una página web
-url = "https://www.google.com"  # Reemplaza con la URL que deseas abrir
-driver.get(url)
+driver.get("https://www.google.com")
 
-# Esperar unos segundos (opcional)
-time.sleep(5)
+# Verificar el título de la página
+assert "Example Domain" in driver.title
 
-# Cerrar el navegador al finalizar
+# Cerrar el navegador
 driver.quit()
