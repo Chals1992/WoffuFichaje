@@ -13,7 +13,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'  # Reemplaza '3.x' con la versión específica de Python que necesites
+          python-version: '3.x'
 
       - name: Install dependencies
         run: |
@@ -22,18 +22,16 @@ jobs:
 
       - name: Download Microsoft Edge WebDriver
         run: |
-          curl -sS -o msedgedriver.zip https://msedgedriver.azureedge.net/126.0.2592.102/edgedriver_win64.zip
-
-      - name: Unzip Microsoft Edge WebDriver
-        run: |
+          curl -sS -o msedgedriver.zip https://msedgedriver.azureedge.net/latest/edgedriver_linux64.zip
           sudo apt-get install -y unzip
-          unzip -o msedgedriver.zip -d $RUNNER_TEMP
+          unzip msedgedriver.zip -d $RUNNER_TEMP/
+          sudo mv $RUNNER_TEMP/msedgedriver /usr/local/bin/
 
-      - name: Set WebDriver Path
-        run: |
-          echo "::set-env name=PATH_TO_EDGE_DRIVER::$RUNNER_TEMP/msedgedriver"
-          echo "$RUNNER_TEMP/msedgedriver" >> $GITHUB_PATH
+      - name: Set up Edge WebDriver path
+        run: echo "PATH_TO_EDGE_DRIVER=/usr/local/bin/msedgedriver" >> $GITHUB_ENV
 
       - name: Run Selenium script
+        env:
+          PATH_TO_EDGE_DRIVER: /usr/local/bin/msedgedriver
         run: |
-          python selenium_test.py
+          python simple_test.py
