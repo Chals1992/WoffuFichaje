@@ -1,7 +1,39 @@
-from selenium import webdriver
+name: Selenium Test with Microsoft Edge
 
-# Configura el driver (por ejemplo, Chrome)
-driver = webdriver.Chrome(executable_path='https://chromedriver.storage.googleapis.com/94.0.4606.61/chromedriver_linux64.zip')
+on: [push, pull_request]
 
-# Abre la página web
-driver.get('https://www.google.com')
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'  # Reemplaza '3.x' con la versión específica de Python que necesites
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install selenium
+
+      - name: Download Microsoft Edge WebDriver
+        run: |
+          curl -sS -o msedgedriver.zip https://msedgedriver.azureedge.net/121.0.6167.139/edgedriver_linux64.zip
+
+      - name: Unzip Microsoft Edge WebDriver
+        run: |
+          sudo apt-get install -y unzip
+          unzip -o msedgedriver.zip -d $RUNNER_TEMP
+
+      - name: Set WebDriver Path
+        run: |
+          echo "::set-env name=PATH_TO_EDGE_DRIVER::$RUNNER_TEMP/msedgedriver"
+          echo "$RUNNER_TEMP/msedgedriver" >> $GITHUB_PATH
+
+      - name: Run Selenium script
+        run: |
+          python selenium_test.py
