@@ -22,7 +22,7 @@ jobs:
 
       - name: Download Microsoft Edge WebDriver
         run: |
-          curl -sS -o msedgedriver.zip https://msedgedriver.azureedge.net/121.0.6167.139/edgedriver_linux64.zip
+          curl -sS -o msedgedriver.zip https://msedgedriver.azureedge.net/126.0.2592.102/edgedriver_win64.zip
 
       - name: Unzip Microsoft Edge WebDriver
         run: |
